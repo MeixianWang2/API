@@ -3,7 +3,7 @@ import numpy as np
 import json
 import csv
 
-with open('/Users/annawang/icloud/Documents/yelp/NY_reviews.json', 'r') as file:
+with open('yelp/NY_reviews.json', 'r') as file:
     data = file.read().replace('\n', '').replace('}{', '},{')
     response = '['+data +']'
 reviews = json.loads(response)
@@ -37,7 +37,7 @@ for review in reviews:
                 t = [review_id, user_id, review_url, text, stars, date]
                 print(t)
                 columns = ['review_id', 'user_id', 'review_url', 'text', 'stars', 'date']
-                with open('/Users/annawang/icloud/Documents/yelp/NY_reviews.csv', 'a', newline='\n') as f:
+                with open('yelp/NY_reviews.csv', 'a', newline='\n') as f:
                     write = csv.writer(f)
                     write.writerow(t)
             except:
