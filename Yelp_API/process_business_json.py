@@ -3,7 +3,7 @@ import numpy as np
 import json
 import csv
 
-with open('/Users/annawang/icloud/Documents/yelp/NY_business.json', 'r') as file:
+with open('yelp/NY_business.json', 'r') as file:
     data = file.read().replace('\n', '').replace('}{', '},{')
     response = '['+data +']'
 businesses = json.loads(response)
@@ -40,20 +40,13 @@ for business in businesses:
                 print(t)
                 columns = ['business_id', 'name', 'website', 'review_count', 'stars', 'latitude',
                            'longitude', 'address', 'city', 'state', 'postal_code', 'categories']
-                with open('GFG.csv', 'a',newline='\n') as f:
+                with open('NY_business.csv', 'a',newline='\n') as f:
                     # using csv.writer method from CSV package
                     write = csv.writer(f)
                     write.writerow(t)
 
-                # df = pd.DataFrame(t, columns=['business_id', 'name', 'item_url', 'review_count', 'stars', 'latitude',
-                #                               'longitude', 'address', 'city', 'state', 'postal_code', 'categories'])
-                # print(1)
-                # df.to_csv('business_NY.csv', index=False)
-                # print(2)
             except:
                 print(1)
-                # with open('A.json', 'a') as outfile:
-                #     json.dump(item, outfile)
                 continue
     except:
         print(2)
