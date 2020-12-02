@@ -22,6 +22,7 @@ for business in a:
     reviews = parsed["reviews"]
     with open('yelp/NY_reviews.json', 'a') as f:
         json.dump(reviews, f, ensure_ascii=False, indent=4)
-
+    
+    print("--- Reviews ---")
     for review in reviews:
         print("User:", review["user"]["name"], "Rating:", review["rating"], "Review:", review["text"], "\n")
