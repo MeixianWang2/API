@@ -3,17 +3,17 @@ import numpy as np
 import json
 import csv
 
-with open('/Users/annawang/icloud/Documents/yelp/NY_reviews1.json', 'r') as file:
+with open('yelp/NY_reviews.json', 'r') as file:
     data = file.read().replace('][', '],[')
     response = '[' + data + ']'
     reviews = json.loads(response)
 
-businesses = pd.read_csv('/Users/annawang/icloud/Documents/yelp/NY_business.csv',usecols=['business_id'])
+businesses = pd.read_csv('yelp/NY_business.csv',usecols=['business_id'])
 
 a = businesses.business_id.tolist()
 
 columns = ['review_id', 'user_id','business_id', 'review_url', 'text', 'stars', 'date']
-with open('/Users/annawang/icloud/Documents/yelp/test.csv', 'a', newline='\n') as f:
+with open('yelp/reviews.csv', 'a', newline='\n') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
@@ -23,18 +23,12 @@ def inputdict4sql(item, item_name):
     except:
         tmpitem = 'null'
     return tmpitem
-#
-#
+
 i=0
 for review in reviews:
     business_id = a[i]
     print(business_id)
     i = i + 1
-    # try:
-    #     items = review['reviews']
-    #     total = review['total']
-    #     print(items)
-    #     print(total)
     for item in review:
         try:
             review_id = inputdict4sql(item, 'id')
@@ -50,11 +44,11 @@ for review in reviews:
             t = [review_id, user_id,business_id, review_url, text, stars, date]
             print(t)
             columns = ['review_id', 'user_id', 'review_url', 'text', 'stars', 'date']
-            with open('/Users/annawang/icloud/Documents/yelp/test.csv', 'a', newline='\n') as f:
+            with open('yelp/reviews.csv', 'a', newline='\n') as f:
                 write = csv.writer(f)
                 write.writerow(t)
         except:
             print(1)
             continue
-#     except:
-# #         print(2)
+            
+            
